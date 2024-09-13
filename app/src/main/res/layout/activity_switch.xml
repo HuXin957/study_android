@@ -3,16 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <TextView
+    <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-    <Button
-        android:id="@+id/btn1"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="跳转" />
-
+        />
+    <CheckBox
+        android:id="@+id/ck_status"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:background="@drawable/switch_selector"
+        android:button="@null"/>
 </LinearLayout>
