@@ -13,6 +13,21 @@
         android:theme="@style/Theme.Study_android"
         tools:targetApi="31">
         <activity
+            android:name=".DatabaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ShareWriteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DatePickerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AlertDialogActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditTextActivity"
+            android:exported="false" />
+        <activity
             android:name=".RadioGroupActivity"
             android:exported="false" />
         <activity
@@ -31,7 +46,7 @@
             android:name=".DrawableShapeActivity"
             android:exported="false" />
         <activity
-            android:name=".EditTextActivity"
+            android:name=".SQLiteHelperActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
