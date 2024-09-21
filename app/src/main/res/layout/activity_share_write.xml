@@ -5,11 +5,16 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/input"
+        android:id="@+id/nameInput"
         android:layout_width="match_parent"
         android:layout_height="58dp"
-        android:hint="please input text" />
-
+        android:hint="please input name" />
+    <EditText
+        android:id="@+id/ageInput"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:hint="please input age"
+        />
     <Button
         android:id="@+id/save11"
         android:layout_width="match_parent"

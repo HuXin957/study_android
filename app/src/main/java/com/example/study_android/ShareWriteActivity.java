@@ -13,9 +13,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.study_android.util.ToastUtil;
+
 public class ShareWriteActivity extends AppCompatActivity {
     SharedPreferences storage;
-    EditText input;
+    EditText nameInput, ageInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,18 +25,26 @@ public class ShareWriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_share_write);
 
         Button btn = findViewById(R.id.save11);
-        input = findViewById(R.id.input);
+        nameInput = findViewById(R.id.nameInput);
+        ageInput = findViewById(R.id.ageInput);
 
         storage = getSharedPreferences("storage", Context.MODE_PRIVATE);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = input.getText().toString();
+                String name = nameInput.getText().toString();
+                String age = ageInput.getText().toString();
 
                 SharedPreferences.Editor editor = storage.edit();
                 editor.putString("name", name);
-                editor.commit();
+                editor.putInt("age", Integer.parseInt(age));
+
+                boolean isSuccess = editor.commit();
+
+                if(isSuccess){
+                    ToastUtil.show(ShareWriteActivity.this,"保存成功");
+                }
             }
         });
         reload();
@@ -42,8 +52,13 @@ public class ShareWriteActivity extends AppCompatActivity {
 
     private void reload() {
         String name = storage.getString("name", null);
+        int age = storage.getInt("age", 0);
+
         if (name != null) {
-            input.setText(name);
+            nameInput.setText(name);
+        }
+        if (age != 0) {
+            ageInput.setText(String.valueOf(age));
         }
     }
 }
