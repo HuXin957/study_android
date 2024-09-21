@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Study_android"
         tools:targetApi="31">
         <activity
-            android:name=".DatabaseActivity"
+            android:name=".ShareWriteActivity"
             android:exported="false" />
         <activity
             android:name=".SQLiteHelperActivity"
@@ -46,7 +46,7 @@
             android:name=".DrawableShapeActivity"
             android:exported="false" />
         <activity
-            android:name=".ShareWriteActivity"
+            android:name=".DatabaseActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

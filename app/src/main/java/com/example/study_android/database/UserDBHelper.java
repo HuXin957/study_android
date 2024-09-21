@@ -78,7 +78,22 @@ public class UserDBHelper extends SQLiteOpenHelper {
     public long insert(User user) {
         ContentValues values = new ContentValues();
         values.put("name", user.name);
-        return mWDB.insert(TABLE_NAME, null, values);
+        try {
+            //开始一个事务
+            mWDB.beginTransaction();
+
+            mWDB.insert(TABLE_NAME, null, values);
+            mWDB.insert(TABLE_NAME, null, values);
+
+            //标记事务成功
+            mWDB.setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            //标记事务结束
+            mWDB.endTransaction();
+        }
+        return 1;
     }
 
     public long deleteByName(User user) {
