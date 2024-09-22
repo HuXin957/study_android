@@ -1,7 +1,12 @@
 package com.example.study_android.util;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -49,5 +54,24 @@ public class FileUtil {
             }
         }
         return sb.toString();
+    }
+
+    public static void saveImage(String path, Bitmap bitmap) {
+        try (FileOutputStream fos = new FileOutputStream(path)) {
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Bitmap readImage(String path) {
+        Bitmap bitmap = null;
+
+        try (FileInputStream fis = new FileInputStream(path)) {
+            bitmap = BitmapFactory.decodeStream(fis);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bitmap;
     }
 }
