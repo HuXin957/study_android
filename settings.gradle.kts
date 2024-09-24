@@ -15,4 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "study_android"
 include(":app")
- 
+include(":cpserve")
+include(":cpclient")
