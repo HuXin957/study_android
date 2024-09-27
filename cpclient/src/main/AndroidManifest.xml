@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
     <!-- 出于安全考虑，Android11要求应用事先说明需要访问的其他软件包 -->
     <queries>
+
         <!-- 第一种写法 -->
-        <!-- <package android:name="com.example.cpserve"/>-->
+        <!-- <package android:name="com.example.cpserve"/> -->
         <!-- 第二种写法 -->
-        <provider android:authorities="com.example.cpserve.provider.MyContentProvider"/>
+        <provider android:authorities="com.example.cpserve.provider.MyContentProvider" />
     </queries>
 
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
 
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
-    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
-    <uses-permission android:name="android.permission.SEND_SMS"/>
-    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
 
     <application
         android:allowBackup="true"
@@ -26,13 +26,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Study_android">
         <activity
+            android:name=".PermissionLazyActivity"
+            android:exported="false" />
+        <activity
             android:name=".ContentWriteActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".PermissionLazyActivity"
+            android:name=".ContactAddActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
