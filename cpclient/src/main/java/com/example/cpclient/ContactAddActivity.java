@@ -3,14 +3,17 @@ package com.example.cpclient;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.OperationApplicationException;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.provider.ContactsContract;
@@ -70,8 +73,42 @@ public class ContactAddActivity extends AppCompatActivity implements View.OnClic
                 addFullContacts(getContentResolver(), contact);
                 break;
             case R.id.btn_query:
+                readPhoneContacts(getContentResolver());
                 break;
         }
+    }
+
+    @SuppressLint("Range")
+    private void readPhoneContacts(ContentResolver resolver) {
+        // 先查询 raw_contacts 表，再根据 row_contacts_id 去查询 data 表
+        Cursor cursor = resolver.query(ContactsContract.RawContacts.CONTENT_URI, new String[]{ContactsContract.RawContacts._ID}, null, null, null, null);
+
+        while (cursor.moveToNext()) {
+            int rawContactId = cursor.getInt(0);
+            Uri uri = Uri.parse("content://com.android.contacts/contacts/" + rawContactId + "/data");
+            Cursor dataCursor = resolver.query(uri, new String[]{Contacts.Data.MIMETYPE, Contacts.Data.DATA1, Contacts.Data.DATA2}, null, null, null);
+
+            Contact contact = new Contact();
+            while (dataCursor.moveToNext()) {
+                String data1 = dataCursor.getString(dataCursor.getColumnIndex(Contacts.Data.DATA1));
+                String mimeType = dataCursor.getString(dataCursor.getColumnIndex(Contacts.Data.MIMETYPE));
+
+                switch (mimeType) {
+                    // 姓名
+                    case CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE:
+                        contact.name = data1;
+                        // 电话
+                    case CommonDataKinds.Phone.CONTENT_ITEM_TYPE:
+                        contact.phone = data1;
+                        // 邮箱
+                    case CommonDataKinds.Email.CONTENT_ITEM_TYPE:
+                        contact.email = data1;
+                }
+            }
+            dataCursor.close();
+            Log.d("AAAA", contact.toString());
+        }
+        cursor.close();
     }
 
     // 往手机通讯录一次性添加一个联系人信息（包括姓名、电话号码、邮箱）
@@ -79,7 +116,7 @@ public class ContactAddActivity extends AppCompatActivity implements View.OnClic
         // 创建一个插入联系人主记录的内容操作器
         ContentProviderOperation op_main = ContentProviderOperation
                 .newInsert(ContactsContract.RawContacts.CONTENT_URI)
-                .withValue(ContactsContract.RawContacts.ACCOUNT_NAME,null)
+                .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, null)
                 .build();
 
         // 创建一个插入联系人姓名记录的内容操作器
