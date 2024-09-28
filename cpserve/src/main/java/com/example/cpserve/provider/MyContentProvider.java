@@ -1,6 +1,7 @@
 package com.example.cpserve.provider;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -34,7 +35,14 @@ public class MyContentProvider extends ContentProvider {
     public Uri insert(Uri uri, ContentValues values) {
         if (URI_MATCHER.match(uri) == USERS) {
             SQLiteDatabase db = dbHelper.getWritableDatabase();
-            db.insert(UserDBHelper.TABLE_NAME, null, values);
+            long rowId = db.insert(UserDBHelper.TABLE_NAME, null, values);
+            if (rowId > 0) {
+                // 如果添加成功，就利用新记录的行号生成新的地址
+                Uri newUri = ContentUris.withAppendedId(UserInfoContent.CONTENT_URI, rowId);
+                // 通知监听器，数据已经改变
+                getContext().getContentResolver().notifyChange(newUri, null);
+
+            }
         }
         return uri;
     }
