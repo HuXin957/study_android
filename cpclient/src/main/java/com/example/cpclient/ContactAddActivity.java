@@ -3,11 +3,14 @@ package com.example.cpclient;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.OperationApplicationException;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.view.View;
 import android.widget.EditText;
 import android.provider.ContactsContract;
@@ -16,6 +19,8 @@ import android.provider.ContactsContract.CommonDataKinds;
 
 import com.example.cpclient.entity.Contact;
 import com.example.cpclient.util.PermissionUtil;
+
+import java.util.ArrayList;
 
 public class ContactAddActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText et_name;
@@ -58,13 +63,73 @@ public class ContactAddActivity extends AppCompatActivity implements View.OnClic
                 contact.phone = et_phone.getText().toString().trim();
                 contact.email = et_email.getText().toString().trim();
                 // 方式一：使用ContentResolver多次写入，每次写入一个字段
-                addContacts(getContentResolver(), contact);
+                // addContacts(getContentResolver(), contact);
+
+                // 方式二：
+                // 往手机通讯录一次性添加一个联系人信息，（包括主记录、姓名、电话号码、邮箱）
+                addFullContacts(getContentResolver(), contact);
                 break;
             case R.id.btn_query:
                 break;
         }
     }
 
+    // 往手机通讯录一次性添加一个联系人信息（包括姓名、电话号码、邮箱）
+    private void addFullContacts(ContentResolver resolver, Contact contact) {
+        // 创建一个插入联系人主记录的内容操作器
+        ContentProviderOperation op_main = ContentProviderOperation
+                .newInsert(ContactsContract.RawContacts.CONTENT_URI)
+                .withValue(ContactsContract.RawContacts.ACCOUNT_NAME,null)
+                .build();
+
+        // 创建一个插入联系人姓名记录的内容操作器
+        ContentProviderOperation op_name = ContentProviderOperation
+                .newInsert(ContactsContract.Data.CONTENT_URI)
+                // 将第0个操作的id，即raw_contacts的id作为data表中的raw_contact_id
+                .withValueBackReference(Contacts.Data.RAW_CONTACT_ID, 0)
+                .withValue(Contacts.Data.MIMETYPE, CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
+                .withValue(Contacts.Data.DATA2, contact.name)
+                .build();
+
+        // 创建一个插入联系人电话号码记录的内容操作器
+        ContentProviderOperation op_phone = ContentProviderOperation
+                .newInsert(ContactsContract.Data.CONTENT_URI)
+                // 将第0个操作的id，即raw_contacts的id作为data表中的raw_contact_id
+                .withValueBackReference(Contacts.Data.RAW_CONTACT_ID, 0)
+                .withValue(Contacts.Data.MIMETYPE, CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+                .withValue(Contacts.Data.DATA1, contact.phone)
+                .withValue(Contacts.Data.DATA2, CommonDataKinds.Phone.TYPE_MOBILE)
+                .build();
+
+        // 创建一个插入联系人电子邮箱记录的内容操作器
+        ContentProviderOperation op_email = ContentProviderOperation
+                .newInsert(ContactsContract.Data.CONTENT_URI)
+                // 将第0个操作的id，即raw_contacts的id作为data表中的raw_contact_id
+                .withValueBackReference(Contacts.Data.RAW_CONTACT_ID, 0)
+                .withValue(Contacts.Data.MIMETYPE, CommonDataKinds.Email.CONTENT_ITEM_TYPE)
+                .withValue(Contacts.Data.DATA1, contact.email)
+                .withValue(Contacts.Data.DATA2, CommonDataKinds.Email.TYPE_WORK)
+                .build();
+
+        // 声明一个内容操作器的列表，并将上面四个操作器添加到该列表中
+        ArrayList<ContentProviderOperation> operations = new ArrayList<>();
+        operations.add(op_main);
+        operations.add(op_name);
+        operations.add(op_phone);
+        operations.add(op_email);
+
+        try {
+            // 批量提交四个操作
+            resolver.applyBatch(ContactsContract.AUTHORITY, operations);
+        } catch (OperationApplicationException e) {
+            throw new RuntimeException(e);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    // 往手机通讯录添加一个联系人信息（包括姓名、电话号码、邮箱）
     private void addContacts(ContentResolver resolver, Contact contact) {
         ContentValues values = new ContentValues();
         // 往 raw_contacts 添加联系人记录，并获取添加后的联系人编号
@@ -90,13 +155,13 @@ public class ContactAddActivity extends AppCompatActivity implements View.OnClic
         ContentValues phone = new ContentValues();
         // 关联联系人编号
         phone.put(Contacts.Data.RAW_CONTACT_ID, rawContactId);
-        // 号码的数据类型
+        // 电话号码的数据类型
         phone.put(Contacts.Data.MIMETYPE, CommonDataKinds.Phone.CONTENT_ITEM_TYPE);
-        // 联系人的姓名
+        // 联系人的电话
         phone.put(Contacts.Data.DATA1, contact.phone);
         // 联系类型> 1：家庭，2：工作
         phone.put(Contacts.Data.DATA2, CommonDataKinds.Phone.TYPE_MOBILE);
-        // 添加联系人姓名记录
+        // 添加联系人电话记录
         resolver.insert(ContactsContract.Data.CONTENT_URI, phone);
 
         /*
@@ -111,7 +176,7 @@ public class ContactAddActivity extends AppCompatActivity implements View.OnClic
         email.put(Contacts.Data.DATA1, contact.email);
         // 邮箱类型
         email.put(Contacts.Data.DATA2, CommonDataKinds.Email.TYPE_WORK);
-        // 添加联系人姓名记录
+        // 添加联系人邮箱记录
         resolver.insert(ContactsContract.Data.CONTENT_URI, email);
     }
 }

@@ -75,8 +75,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:hint="请输入邮箱"
-            android:inputType="number"
             android:textColor="@color/black"
+            android:inputType="textEmailAddress"
             android:textSize="17sp" />
     </LinearLayout>
 
