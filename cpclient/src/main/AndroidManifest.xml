@@ -26,6 +26,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Study_android">
         <activity
+            android:name=".MonitorSmsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ContactAddActivity"
             android:exported="false" />
         <activity
@@ -38,7 +41,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MonitorSmsActivity"
+            android:name=".SendMmsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
