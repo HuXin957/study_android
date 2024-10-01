@@ -4,14 +4,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:hint="请输入电话"
+        android:layout_height="80dp"/>
+    <EditText
+        android:id="@+id/title"
+        android:hint="请输入标题"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
+    <EditText
+        android:id="@+id/message"
+        android:hint="请输入内容"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
     <Button
         android:id="@+id/btn_jump"
         android:layout_width="wrap_content"
         android:layout_height="80dp"
-        android:text="跳转相册"
+        android:text="添加图片相册"
         />
     <ImageView
         android:id="@+id/iv_appendix"
         android:layout_width="wrap_content"
         android:layout_height="100dp"/>
+    <Button
+        android:id="@+id/send"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
 </LinearLayout>
