@@ -2,5 +2,5 @@
 <paths>
     <external-path
         name="external_storage_download"
-        path="Download"></external-path>
+        path="Download" />
 </paths>
