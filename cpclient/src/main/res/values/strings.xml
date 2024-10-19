@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">cpClient</string>
+    <string name="file_provider">com.example.cpclient.fileProvider</string>
 </resources>

@@ -42,6 +42,8 @@ public class SendMmsActivity extends AppCompatActivity {
             public void onActivityResult(ActivityResult result) {
                 if (result.getResultCode() == RESULT_OK) {
                     Intent intent = result.getData();
+                    // 获得选中图片的路径对象
+                    // content://com.android.providers.downloads.docu
                     picUri = intent.getData();
                     if (picUri != null) {
                         iv_appendix.setImageURI(picUri);
