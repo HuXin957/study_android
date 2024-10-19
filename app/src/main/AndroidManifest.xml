@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Study_android"
         tools:targetApi="31">
         <activity
+            android:name=".RoomWriteActivity"
+            android:exported="false" />
+        <activity
             android:name=".AppWriteActivity"
             android:exported="false" />
         <activity
@@ -63,7 +66,7 @@
             android:name=".DrawableShapeActivity"
             android:exported="false" />
         <activity
-            android:name=".RoomWriteActivity"
+            android:name=".SpinnerDropdownActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
