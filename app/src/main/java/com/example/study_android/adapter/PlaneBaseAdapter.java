@@ -40,16 +40,34 @@ public class PlaneBaseAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_list, null);
-        ImageView iv_icon = view.findViewById(R.id.iv_icon);
-        TextView tv_name = view.findViewById(R.id.tv_name);
-        TextView tv_desc = view.findViewById(R.id.tv_desc);
+        ViewHolder holder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_list, null);
 
-        Planet planet=mPlaneList.get(i);
-        iv_icon.setImageResource(planet.image);
-        tv_name.setText(planet.name);
-        tv_desc.setText(planet.desc);
+            holder = new ViewHolder();
 
-        return view;
+            holder.iv_icon = convertView.findViewById(R.id.iv_icon);
+            holder.tv_name = convertView.findViewById(R.id.tv_name);
+            holder.tv_desc = convertView.findViewById(R.id.tv_desc);
+
+            // 将视图持有者保存到转换视图当中
+            convertView.setTag(holder);
+        } else {
+            holder=(ViewHolder) convertView.getTag();
+        }
+
+
+        Planet planet = mPlaneList.get(i);
+        holder.iv_icon.setImageResource(planet.image);
+        holder.tv_name.setText(planet.name);
+        holder.tv_desc.setText(planet.desc);
+
+        return convertView;
+    }
+
+    public final class ViewHolder {
+        public ImageView iv_icon;
+        public TextView tv_name;
+        public TextView tv_desc;
     }
 }
