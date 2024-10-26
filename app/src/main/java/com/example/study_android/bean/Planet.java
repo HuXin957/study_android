@@ -19,19 +19,19 @@ public class Planet {
     private static int[] iconArray = {
             R.drawable.shuixing,
             R.drawable.diqiu,
-            R.drawable.shuixing,
-            R.drawable.shuixing,
-            R.drawable.shuixing,
-            R.drawable.shuixing,
+            R.drawable.jinxing,
+            R.drawable.muxing,
+            R.drawable.tuxing,
+            R.drawable.huoxing,
     };
 
     private static String[] nameArray = {
+            "金星",
+            "木星",
             "水星",
-            "水星",
-            "水星",
-            "水星",
-            "水星",
-            "水星",
+            "火星",
+            "土星",
+            "地球",
     };
 
     private static String[] descArray = {
