@@ -59,6 +59,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MYAPP"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity> <!-- 兼容Android7.0，把访问文件的Uri方式改为FileProvider -->
         <!-- android:grantUriPermissions 必须设置为true -->
         <provider

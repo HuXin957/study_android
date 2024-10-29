@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ActStartActivity">
+
+    <Button
+        android:id="@+id/btn_nav"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="显示跳转" />
+
+    <Button
+        android:id="@+id/btn_nav_hidden"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="隐示跳转(跳到短信页面)" />
+
+    <Button
+        android:id="@+id/btn_nav_my"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="隐示跳转(跳到我们的另一个APP)" />
+
+    <Button
+        android:id="@+id/btn_next_data"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="向下一个Activity传递数据" />
+
+    <Button
+        android:id="@+id/btn_data_res"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="下个页面会返回数据" />
+    <TextView
+        android:id="@+id/tv_res"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
