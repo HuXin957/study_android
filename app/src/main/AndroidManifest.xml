@@ -82,13 +82,19 @@
             android:exported="false" />
         <activity
             android:name=".MetaDataActivity"
+            android:exported="false" >
+            <meta-data
+                android:name="weather"
+                android:value="晴天" />
+        </activity>
+        <activity
+            android:name=".BroadStandardActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data android:name="weather" android:value="晴天"/>
         </activity>
     </application>
 
