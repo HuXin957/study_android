@@ -58,6 +58,7 @@ public class BroadOrderActivity extends AppCompatActivity implements View.OnClic
             public void onReceive(Context context, Intent intent) {
                 if (intent != null && intent.getAction().equals(ORDER_ACTION)) {
                     btn_send_order.setText("来了");
+                    abortBroadcast();// 中断广播，此时后面的接收器无法收到该广播
                 }
             }
         };
