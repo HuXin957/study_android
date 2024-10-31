@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".MyApplication"
@@ -18,12 +18,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Study_android"
         tools:targetApi="31">
+        <activity
+            android:name=".BroadStaticActivity"
+            android:exported="false" />
+
         <receiver
             android:name=".receiver.ShockReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.example.study_android.shock"/>
+                <action android:name="com.example.study_android.shock" />
             </intent-filter>
         </receiver>
 
@@ -104,7 +108,7 @@
                 android:value="晴天" />
         </activity>
         <activity
-            android:name=".BroadStaticActivity"
+            android:name=".SystemMinuteActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
