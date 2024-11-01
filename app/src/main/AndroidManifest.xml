@@ -113,7 +113,12 @@
         <activity
             android:name=".ChangeDirectionActivity"
             android:configChanges="orientation|screenLayout|screenSize"
-            android:screenOrientation="landscape"
+            android:exported="true"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".ReturnDesktopActivity"
+            android:supportsPictureInPicture="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
