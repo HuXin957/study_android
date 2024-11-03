@@ -41,10 +41,16 @@
             android:name=".BroadStandardActivity"
             android:exported="false" />
         <activity
-            android:name=".ActStartActivity"
+            android:name=".FragmentStaticActivity"
             android:exported="false" />
         <activity
             android:name=".ActFinishActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActStartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListFocusActivity"
             android:exported="false" />
         <activity
             android:name=".ListViewActivity"
