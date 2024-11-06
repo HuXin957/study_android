@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TakePhotoActivity">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:onClick="takePhoto"
+        android:text="打开相机" />
+    <Button
+        android:text="打开相册"
+        android:onClick="choosePhoto"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+    <ImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#333"/>
+</LinearLayout>

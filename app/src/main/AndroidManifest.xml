@@ -2,10 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".MyApplication"
@@ -19,6 +24,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Study_android"
         tools:targetApi="31">
+        <activity
+            android:name=".ServiceActivity"
+            android:exported="false" />
         <activity
             android:name=".FragmentDynamicActivity"
             android:exported="false" />
@@ -129,9 +137,9 @@
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ServiceActivity"
+            android:name=".TakePhotoActivity"
             android:exported="true"
-            android:supportsPictureInPicture="true"><!--支持画中画-->
+            android:supportsPictureInPicture="true"> <!-- 支持画中画 -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -139,9 +147,18 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".service.MyService"/>
-        <service android:name="com.example.study_android.service.BindService" />
-        <service android:name="com.example.study_android.service.FrontService" />
+        <service android:name=".service.MyService" />
+        <service android:name=".service.BindService" />
+        <service android:name=".service.FrontService" />
+
+        <provider
+            android:authorities="com.example.study_android.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/files"/>
+        </provider>
     </application>
 
 </manifest>
