@@ -25,6 +25,9 @@
         android:theme="@style/Theme.Study_android"
         tools:targetApi="31">
         <activity
+            android:name=".TakePhotoActivity"
+            android:exported="false" />
+        <activity
             android:name=".ServiceActivity"
             android:exported="false" />
         <activity
@@ -137,7 +140,7 @@
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".TakePhotoActivity"
+            android:name=".ThreadActivity"
             android:exported="true"
             android:supportsPictureInPicture="true"> <!-- 支持画中画 -->
             <intent-filter>
@@ -152,12 +155,13 @@
         <service android:name=".service.FrontService" />
 
         <provider
-            android:authorities="com.example.study_android.fileprovider"
             android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.study_android.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
-            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/files"/>
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/files" />
         </provider>
     </application>
 
