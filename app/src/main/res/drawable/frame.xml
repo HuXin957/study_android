@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/diqiu"
+        android:duration="120" />
+    <item
+        android:drawable="@drawable/huoxing"
+        android:duration="120" />
+    <item
+        android:drawable="@drawable/tuxing"
+        android:duration="120" />
+    <item
+        android:drawable="@drawable/shuixing"
+        android:duration="120" />
+</animation-list>

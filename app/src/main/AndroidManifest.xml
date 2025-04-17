@@ -27,6 +27,9 @@
         android:theme="@style/Theme.Study_android"
         tools:targetApi="31">
         <activity
+            android:name=".FrameLayoutActivity"
+            android:exported="false" />
+        <activity
             android:name=".NotificationActivity"
             android:exported="false" />
         <activity
@@ -151,7 +154,7 @@
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".FrameLayoutActivity"
+            android:name=".FrameAnimationActivity"
             android:exported="true"
             android:supportsPictureInPicture="true"> <!-- 支持画中画 -->
             <intent-filter>
