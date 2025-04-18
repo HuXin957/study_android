@@ -1,6 +1,7 @@
 package com.example.study_android;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
@@ -59,5 +60,14 @@ public class PropertyAnimate extends AppCompatActivity {
                 //重复
             }
         });
+
+        // 监听适配方式，只监听某一个都可以
+        objectAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+            }
+        });
+
     }
 }
