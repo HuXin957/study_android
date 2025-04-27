@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "com.example.study_android"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.study_android"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -53,4 +53,6 @@ dependencies {
 
     implementation("androidx.room:room-runtime:2.2.5")
     annotationProcessor("androidx.room:room-compiler:2.2.5")
+
+    implementation("androidx.recyclerview:recyclerview:1.4.0")
 }
